@@ -85,7 +85,7 @@ function devImages() {
 
 function watchFiles() {
   watch(
-    `${options.paths.src.html}/**/*.html`,
+    `${options.paths.src.html}/**/*.+(html|njk|nunjucks)`,
     series(devHTML, devStyles, previewReload)
   );
   watch(
@@ -113,7 +113,7 @@ function prodStyles() {
   return src(`${options.paths.dist.css}/**/*`)
     .pipe(
       purgecss({
-        content: ["src/**/*.{html,js}"],
+        content: ["src/**/*.{html,njk,nunjucks}"],
         defaultExtractor: (content) => {
           const broadMatches = content.match(/[^<>"'`\s]*[^<>"'`\s:]/g) || [];
           const innerMatches =
