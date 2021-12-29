@@ -1,0 +1,25 @@
+{
+  "name": "ganisda-web-design",
+  "version": "1.0.0",
+  "description": "Ganisda Starter KIT Frontend with TailwindCSS",
+  "main": "gulpfile.js",
+  "scripts": {
+    "dev": "gulp",
+    "build": "gulp prod",
+    "prod": "gulp prod"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ganisda/ganisda-web-design.git"
+  },
+  "keywords": [
+    "ganisda",
+    "gulp4",
+    "tailwind",
+    "tailwindcss",
+    "sass"
+  ],
+  "author": "Rizal Arfiyan",
+  "license": "ISC",
+  "homepage": "git+https://github.com/ganisda/ganisda-web-design.git"
+}
