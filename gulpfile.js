@@ -3,7 +3,7 @@ const del = require("del");
 const options = require("./config");
 const browserSync = require("browser-sync").create();
 
-const sass = require('gulp-sass')(require('sass'));
+const sass = require("gulp-sass")(require("sass"));
 const postcss = require("gulp-postcss");
 const concat = require("gulp-concat");
 const uglify = require("gulp-terser");
@@ -11,12 +11,15 @@ const imagemin = require("gulp-imagemin");
 const cleanCSS = require("gulp-clean-css");
 const purgecss = require("gulp-purgecss");
 
+const gulpData = require("gulp-data");
+const nunjucksRender = require("gulp-nunjucks-render");
+
 const logSymbols = require("log-symbols");
 
 function livePreview(done) {
   browserSync.init({
     server: {
-      baseDir: options.paths.dist.base,
+      baseDir: options.paths.dist.html,
     },
     port: options.config.port || 8080,
   });
@@ -29,10 +32,27 @@ function previewReload(done) {
   done();
 }
 
+function runHTML() {
+  return src([
+    `${options.paths.src.html}/**/*.+(html|njk|nunjucks)`,
+    `!${options.paths.src.html}/layouts/**/*.+(html|njk|nunjucks)`,
+    `!${options.paths.src.html}/partials/**/*.+(html|njk|nunjucks)`,
+    `!${options.paths.src.html}/macros/**/*.+(html|njk|nunjucks)`,
+  ])
+    .pipe(
+      gulpData(function () {
+        return require(options.data);
+      })
+    )
+    .pipe(
+      nunjucksRender({
+        path: [options.paths.src.html],
+      })
+    );
+}
+
 function devHTML() {
-  return src(`${options.paths.src.base}/**/*.html`).pipe(
-    dest(options.paths.dist.base)
-  );
+  return runHTML().pipe(dest(options.paths.dist.html));
 }
 
 function devStyles() {
@@ -65,7 +85,7 @@ function devImages() {
 
 function watchFiles() {
   watch(
-    `${options.paths.src.base}/**/*.html`,
+    `${options.paths.src.html}/**/*.html`,
     series(devHTML, devStyles, previewReload)
   );
   watch(
@@ -82,13 +102,11 @@ function devClean() {
     "\n\t" + logSymbols.info,
     "Cleaning dist folder for fresh start.\n"
   );
-  return del([options.paths.dist.base]);
+  return del([options.paths.dist.html]);
 }
 
 function prodHTML() {
-  return src(`${options.paths.src.base}/**/*.html`).pipe(
-    dest(options.paths.build.base)
-  );
+  return runHTML().pipe(dest(options.paths.build.html));
 }
 
 function prodStyles() {
@@ -129,13 +147,13 @@ function prodClean() {
     "\n\t" + logSymbols.info,
     "Cleaning build folder for fresh start.\n"
   );
-  return del([options.paths.build.base]);
+  return del([options.paths.build.html]);
 }
 
 function buildFinish(done) {
   console.log(
     "\n\t" + logSymbols.info,
-    `Production build is complete. Files are located at ${options.paths.build.base}\n`
+    `Production build is complete. Files are located at ${options.paths.build.html}\n`
   );
   done();
 }
