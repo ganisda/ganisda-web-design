@@ -13,6 +13,7 @@ const purgecss = require("gulp-purgecss");
 
 const gulpData = require("gulp-data");
 const nunjucksRender = require("gulp-nunjucks-render");
+const htmlmin = require("gulp-htmlmin");
 
 const logSymbols = require("log-symbols");
 
@@ -106,7 +107,13 @@ function devClean() {
 }
 
 function prodHTML() {
-  return runHTML().pipe(dest(options.paths.build.html));
+  return runHTML()
+    .pipe(
+      htmlmin({
+        collapseWhitespace: true,
+      })
+    )
+    .pipe(dest(options.paths.build.html));
 }
 
 function prodStyles() {

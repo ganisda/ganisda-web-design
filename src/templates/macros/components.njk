@@ -24,6 +24,8 @@
 
 {% macro icons(path="", size=24, class="") %}
   {% if path != "" %}
-    <svg xmlns="http://www.w3.org/2000/svg" class="{{class}}" width="{{size}}" height="{{size}}" viewBox="0 0 24 24" fill="currentColor"><path d="{{path}}"></path></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" class="{{class}}" width="{{size}}" height="{{size}}" viewBox="0 0 24 24" fill="currentColor">
+      <path d="{{path}}"></path>
+    </svg>
   {% endif %}
 {% endmacro %}
