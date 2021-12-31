@@ -22,6 +22,7 @@
   "license": "ISC",
   "homepage": "git+https://github.com/ganisda/ganisda-web-design.git",
   "devDependencies": {
+    "@tailwindcss/forms": "^0.4.0",
     "autoprefixer": "^10.4.0",
     "browser-sync": "^2.27.7",
     "del": "^6.0.0",

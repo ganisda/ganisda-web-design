@@ -1,6 +1,7 @@
 {% extends "layouts/base.njk" %}
 
 {% import "macros/components.njk" as components %}
+{% import "macros/social.njk" as social %}
 
 {%
   set title = "Login | " + title
@@ -9,15 +10,41 @@
 {% block content %}
   <section class="container">
     <div class="flex items-center justify-center min-h-screen w-full">
-      <div class="bg-white p-6 sm:p-12 mx-4 rounded-lg shadow-lg max-w-md text-center">
-        <img class="object-cover w-36 h-36 mx-auto" src="https://avatars.githubusercontent.com/u/96787388?s=200&v=4" alt="Logo">
+      <div class="bg-white p-6 pb-8 sm:p-12 mx-4 rounded-lg shadow-lg max-w-md text-center relative">
+        <div class="absolute top-1 left-5">
+          <a href="index.html" class="inline-flex items-center justify-center relative overflow-hidden mx-auto focus:outline-none transition ease-in-out duration-300 p-1.5 font-semibold bg-gray-100 hover:bg-gray-200 focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50 text-gray-600 rounded-md mt-4 group">
+            {{ components.icons(icons.left) }}
+          </a>
+        </div>
+        <div class="w-36 h-36 mx-auto">
+          <img class="object-cover" src="https://avatars.githubusercontent.com/u/96787388?s=200&v=4" alt="Logo">
+        </div>
         <div class="mb-2">
           <h1 class="text-2xl sm:text-3xl font-semibold text-gray-700 mb-1">Ganisda SMANDA</h1>
           <p class="text-gray-500 leading-4 text-sm">
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Possimus sapiente aperiam eius assumenda alias in, quo sed molestiae aliquam libero!
           </p>
         </div>
-        {{ components.a("setup_profile.html", "Login With Google!", "r", icons.google) }}
+        <div class="grid grid-cols-1 gap-2 mt-6">
+          <a href="setup_profile.html" class="inline-flex items-center justify-center relative overflow-hidden mx-auto focus:outline-none transition ease-in-out duration-300 p-1.5 font-semibold bg-blue-500 hover:bg-blue-600 focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50 text-white rounded-md">
+            <div class="bg-white p-1 rounded-md">
+              {{ social.google() }}
+            </div>
+            <span class="pl-4 pr-6">Google</span>
+          </a>
+          <a href="setup_profile.html" class="inline-flex items-center justify-center relative overflow-hidden mx-auto focus:outline-none transition ease-in-out duration-300 p-1.5 font-semibold bg-blue-500 hover:bg-blue-600 focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50 text-white rounded-md">
+            <div class="bg-white p-1 rounded-md">
+              {{ components.icons(icons.github, 24, "fill-gray-800") }}
+            </div>
+            <span class="pl-4 pr-6">Github</span>
+          </a>
+          <a href="setup_profile.html" class="inline-flex items-center justify-center relative overflow-hidden mx-auto focus:outline-none transition ease-in-out duration-300 p-1.5 font-semibold bg-blue-500 hover:bg-blue-600 focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50 text-white rounded-md">
+            <div class="bg-white p-1 rounded-md">
+              {{ components.icons(icons.facebook, 24, "fill-gray-800") }}
+            </div>
+            <span class="pl-4 pr-6">Facebook</span>
+          </a>
+        </div>
       </div>
     </div>
   </section>
